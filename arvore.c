@@ -147,7 +147,58 @@ link rotR(ARVORE a, link h) {
 
 #if 0
 void remover (ARVORE a, int key);
-void removerNo (ARVORE a, link node);
+void removerNo (ARVORE a, link node){
+
+  	ARVORE *t, *f;
+	 if (a == NULL){
+	 }
+	
+	 else if (node > a)
+	 removerNo(node->left, a);
+	 else if (node->key < a)
+	  removerNo(node->right, a);
+	 else { /* achou o nó a remover */
+	 if (node->left == NULL && node->right == NULL) /* nó sem filhos */
+	 {
+	 free(node);
+	 
+	 }
+	 else if (node->left == NULL) /* nó só tem filho à direita */
+	 {
+	 t = node;
+	 node = node->right;
+	 free(t);
+	 }
+	 
+	 else if (node->right == NULL) /* só tem filho à esquerda */
+	 {
+	 t = node;
+	 node = node->left;
+	 free (t);
+	 }
+	 else { /* nó tem os dois filhos */
+	 f = node->left;
+	 while (node->right != NULL)
+	 {
+	 f = node->right;
+	 }
+	 node->key = f; /* troca as informações */
+	 f = a;
+	 removerNo(node->left, a);
+	 }
+	 }
+	}
+
+
+
+
+
+
+
+
+
+
+
 void destroiArvore(ARVORE a);
 #endif 
 
